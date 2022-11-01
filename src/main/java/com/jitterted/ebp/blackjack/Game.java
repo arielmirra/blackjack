@@ -14,24 +14,16 @@ public class Game {
 
     private final Deck deck;
 
-    private final List<Card> dealerHand = new ArrayList<>();
-    private final List<Card> playerHand = new ArrayList<>();
+    private final List<Card> dealerHand = new ArrayList<>(); // TODO: primitive obsession, how many cards? Player could be a type, the count could be done inside instead of having `handValueOf()`
+    private final List<Card> playerHand = new ArrayList<>(); // TODO: primitive obsession, how many cards? Player could be a type, the count could be done inside instead of having `handValueOf()`
 
     // TODO: LONG METHOD - too many unrelated things - extract to method
     public static void main(String[] args) {
         Game game = new Game();
 
         AnsiConsole.systemInstall();
-        System.out.println(ansi()
-                                   .bgBright(Ansi.Color.WHITE)
-                                   .eraseScreen()
-                                   .cursor(1, 1)
-                                   .fgGreen().a("Welcome to")
-                                   .fgRed().a(" JitterTed's")
-                                   .fgBlack().a(" BlackJack game"));
-        System.out.println(ansi()
-                                   .cursor(3, 1)
-                                   .fgBrightBlack().a("Hit [ENTER] to start..."));
+
+        displayIntro();
 
         System.console().readLine();
 
@@ -42,11 +34,23 @@ public class Game {
         System.out.println(ansi().reset());
     }
 
+    private static void displayIntro() {
+        System.out.println(ansi()
+                                   .bgBright(Ansi.Color.WHITE)
+                                   .eraseScreen()
+                                   .cursor(1, 1)
+                                   .fgGreen().a("Welcome to")
+                                   .fgRed().a(" EsPorAhi's")
+                                   .fgBlack().a(" BlackJack game"));
+        System.out.println(ansi()
+                                   .cursor(3, 1)
+                                   .fgBrightBlack().a("Hit [ENTER] to start..."));
+    }
+
     public Game() {
         deck = new Deck();
     }
 
-    // TODO: LONG METHOD
     public void initialDeal() {
         // deal first round of cards, players first
         playerHand.add(deck.draw());
@@ -126,19 +130,23 @@ public class Game {
     }
 
     private void displayGameState() {
-        // todo: extract to method
-        System.out.print(ansi().eraseScreen().cursor(1, 1));
-        System.out.println("Dealer has: ");
-        System.out.println(dealerHand.get(0).display()); // first card is Face Up
+        displayDealerHand(false);
+        displayBackOfCard(); // second card is the hole card, which is hidden
+        displayPlayerHand();
+    }
 
-        // second card is the hole card, which is hidden
-        displayBackOfCard();
-
-        // todo: extract to method
+    private void displayPlayerHand() {
         System.out.println();
         System.out.println("Player has: ");
         displayHand(playerHand);
         System.out.println(" (" + handValueOf(playerHand) + ")");
+    }
+
+    private void displayDealerHand(boolean withCards) {
+        System.out.print(ansi().eraseScreen().cursor(1, 1));
+        System.out.println("Dealer has: ");
+        if (withCards) displayHand(dealerHand);
+        System.out.println(dealerHand.get(0).display()); // first card is Face Up
     }
 
     private void displayBackOfCard() {
@@ -148,9 +156,9 @@ public class Game {
                         .cursorRight(12)
                         .a("┌─────────┐").cursorDown(1).cursorLeft(11)
                         .a("│░░░░░░░░░│").cursorDown(1).cursorLeft(11)
-                        .a("│░ J I T ░│").cursorDown(1).cursorLeft(11)
-                        .a("│░ T E R ░│").cursorDown(1).cursorLeft(11)
-                        .a("│░ T E D ░│").cursorDown(1).cursorLeft(11)
+                        .a("│░ E S   ░│").cursorDown(1).cursorLeft(11)
+                        .a("│░ P O R ░│").cursorDown(1).cursorLeft(11)
+                        .a("│░ A H I ░│").cursorDown(1).cursorLeft(11)
                         .a("│░░░░░░░░░│").cursorDown(1).cursorLeft(11)
                         .a("└─────────┘"));
     }
@@ -162,16 +170,8 @@ public class Game {
                                        ansi().cursorUp(6).cursorRight(1).toString())));
     }
 
-    // todo: repeated code with displayGameState()
     private void displayFinalGameState() {
-        System.out.print(ansi().eraseScreen().cursor(1, 1));
-        System.out.println("Dealer has: ");
-        displayHand(dealerHand);
-        System.out.println(" (" + handValueOf(dealerHand) + ")");
-
-        System.out.println();
-        System.out.println("Player has: ");
-        displayHand(playerHand);
-        System.out.println(" (" + handValueOf(playerHand) + ")");
+        displayDealerHand(true);
+        displayPlayerHand();
     }
 }

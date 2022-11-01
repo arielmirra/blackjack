@@ -5,8 +5,8 @@ import org.fusesource.jansi.Ansi;
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class Card {
-    private final String suit;
-    private final String rank;
+    private final String suit; // primitive obsession TODO: use an Enum (no Stringly-Typed code)
+    private final String rank; // primitive obsession TODO: use an Enum (no Stringly-Typed code)
 
     public Card(String suit, String rank) {
         this.suit = suit;
