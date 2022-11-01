@@ -3,7 +3,6 @@ package com.jitterted.ebp.blackjack;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +17,7 @@ public class Game {
     private final List<Card> dealerHand = new ArrayList<>();
     private final List<Card> playerHand = new ArrayList<>();
 
+    // TODO: LONG METHOD - too many unrelated things - extract to method
     public static void main(String[] args) {
         Game game = new Game();
 
@@ -46,8 +46,8 @@ public class Game {
         deck = new Deck();
     }
 
+    // TODO: LONG METHOD
     public void initialDeal() {
-
         // deal first round of cards, players first
         playerHand.add(deck.draw());
         dealerHand.add(deck.draw());
@@ -57,6 +57,7 @@ public class Game {
         dealerHand.add(deck.draw());
     }
 
+    // TODO: LONG METHOD - too many lines
     public void play() {
         // get Player's decision: hit until they stand, then they're done (or they go bust)
         boolean playerBusted = false;
@@ -98,6 +99,7 @@ public class Game {
         }
     }
 
+    // todo: not easy readable - does many things
     public int handValueOf(List<Card> hand) {
         int handValue = hand
                 .stream()
@@ -124,6 +126,7 @@ public class Game {
     }
 
     private void displayGameState() {
+        // todo: extract to method
         System.out.print(ansi().eraseScreen().cursor(1, 1));
         System.out.println("Dealer has: ");
         System.out.println(dealerHand.get(0).display()); // first card is Face Up
@@ -131,6 +134,7 @@ public class Game {
         // second card is the hole card, which is hidden
         displayBackOfCard();
 
+        // todo: extract to method
         System.out.println();
         System.out.println("Player has: ");
         displayHand(playerHand);
@@ -158,6 +162,7 @@ public class Game {
                                        ansi().cursorUp(6).cursorRight(1).toString())));
     }
 
+    // todo: repeated code with displayGameState()
     private void displayFinalGameState() {
         System.out.print(ansi().eraseScreen().cursor(1, 1));
         System.out.println("Dealer has: ");

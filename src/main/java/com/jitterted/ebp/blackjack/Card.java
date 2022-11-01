@@ -14,7 +14,7 @@ public class Card {
     }
 
     public int rankValue() {
-        if ("JQK".contains(rank)) {
+        if ("JQK".contains(rank)) { // todo: what JQK means? - don't do undefined strings
             return 10;
         } else if (rank.equals("A")) {
             return 1;
@@ -23,6 +23,7 @@ public class Card {
         }
     }
 
+    // todo: long method - doing different things - extract to method
     public String display() {
         String[] lines = new String[7];
         lines[0] = "┌─────────┐";

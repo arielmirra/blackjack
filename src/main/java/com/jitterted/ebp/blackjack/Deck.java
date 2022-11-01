@@ -8,13 +8,16 @@ public class Deck {
     private final List<Card> cards = new ArrayList<>();
 
     public Deck() {
+        // todo: maybe enums?
         List<String> cardValues = List.of("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K");
         List<String> suits = List.of("♠", "♦", "♥", "♣");
+        // todo: extract to method
         for (String suit : suits) {
             for (String cardValue : cardValues) {
                 cards.add(new Card(suit, cardValue));
             }
         }
+        // todo: needed?
         Collections.shuffle(cards);
     }
 
