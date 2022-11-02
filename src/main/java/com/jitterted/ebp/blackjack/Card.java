@@ -1,5 +1,7 @@
 package com.jitterted.ebp.blackjack;
 
+import org.fusesource.jansi.Ansi;
+
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class Card {
@@ -25,8 +27,10 @@ public class Card {
         lines[5] = String.format("│       %s%s│", rank.getValue() == 10 ? "" : " ", rank);
         lines[6] = "└─────────┘";
 
+        Ansi.Color color = suit.isRed() ? Ansi.Color.RED : Ansi.Color.BLACK;
+
         return ansi()
-                .fg(suit.getColor()).toString()
+                .fg(color).toString()
                 + String.join(ansi().cursorDown(1)
                                     .cursorLeft(11)
                                     .toString(), lines);

@@ -4,26 +4,26 @@ import org.fusesource.jansi.Ansi;
 
 
 public enum Suit {
-    CLUBS("♣", Ansi.Color.BLACK),
-    DIAMONDS("♦", Ansi.Color.RED),
-    HEARTS("♥", Ansi.Color.RED),
-    SPADES("♠", Ansi.Color.BLACK);
+    CLUBS("♣", false),
+    DIAMONDS("♦", true),
+    HEARTS("♥", true),
+    SPADES("♠", false);
 
     private String displayString;
 
-    private Ansi.Color color;
+    private boolean isRed;
 
-    Suit(String displayString, Ansi.Color color) {
+    Suit(String displayString, boolean isRed) {
         this.displayString = displayString;
-        this.color = color;
+        this.isRed = isRed;
     }
 
     public String getDisplayString() {
         return displayString;
     }
 
-    public Ansi.Color getColor() {
-        return color;
+    public boolean isRed() {
+        return isRed;
     }
 
 
