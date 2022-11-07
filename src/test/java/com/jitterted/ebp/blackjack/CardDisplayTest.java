@@ -14,7 +14,7 @@ class CardDisplayTest {
 
         String expectedDisplay = "[31m┌─────────┐[1B[11D│10       │[1B[11D│         │[1B[11D│    ♥    │[1B[11D│         │[1B[11D│       10│[1B[11D└─────────┘";
 
-        assertThat(Card.display(card))
+        assertThat(ConsoleCard.display(card))
                 .isEqualTo(expectedDisplay);
     }
 
@@ -24,7 +24,7 @@ class CardDisplayTest {
 
         String expectedDisplay = "[31m┌─────────┐[1B[11D│7        │[1B[11D│         │[1B[11D│    ♥    │[1B[11D│         │[1B[11D│        7│[1B[11D└─────────┘";
 
-        assertThat(Card.display(card))
+        assertThat(ConsoleCard.display(card))
                 .isEqualTo(expectedDisplay);
     }
 }
