@@ -1,7 +1,4 @@
-package com.jitterted.ebp.blackjack;
-
-import org.fusesource.jansi.Ansi;
-
+package com.jitterted.ebp.blackjack.domain;
 
 public enum Suit {
     CLUBS("♣", false),
@@ -9,9 +6,9 @@ public enum Suit {
     HEARTS("♥", true),
     SPADES("♠", false);
 
-    private String displayString;
+    private final String displayString;
 
-    private boolean isRed;
+    private final boolean isRed;
 
     Suit(String displayString, boolean isRed) {
         this.displayString = displayString;

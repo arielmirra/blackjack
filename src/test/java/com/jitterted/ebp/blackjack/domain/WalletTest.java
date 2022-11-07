@@ -1,4 +1,4 @@
-package com.jitterted.ebp.blackjack;
+package com.jitterted.ebp.blackjack.domain;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 public class WalletTest {
 
     @Test
-    public void newWalletIsEmpty() throws Exception {
+    public void newWalletIsEmpty() {
         Wallet wallet = new Wallet();
 
         assertThat(wallet.isEmpty())
@@ -15,7 +15,7 @@ public class WalletTest {
     }
 
     @Test
-    public void newWalletAddMoneyIsNotEmpty() throws Exception {
+    public void newWalletAddMoneyIsNotEmpty() {
         Wallet wallet = new Wallet();
 
         wallet.addMoney(10);
@@ -25,7 +25,7 @@ public class WalletTest {
     }
 
     @Test
-    public void newWalletHasZeroBalance() throws Exception {
+    public void newWalletHasZeroBalance() {
         Wallet wallet = new Wallet();
 
         assertThat(wallet.balance())
@@ -33,7 +33,7 @@ public class WalletTest {
     }
 
     @Test
-    public void newWalletAdd15HasBalanceOf15() throws Exception {
+    public void newWalletAdd15HasBalanceOf15() {
         Wallet wallet = new Wallet();
 
         wallet.addMoney(15);
@@ -43,7 +43,7 @@ public class WalletTest {
     }
 
     @Test
-    public void newWalletAdd17And18HasBalanceOf35() throws Exception {
+    public void newWalletAdd17And18HasBalanceOf35() {
         Wallet wallet = new Wallet();
 
         wallet.addMoney(17);
@@ -54,12 +54,10 @@ public class WalletTest {
     }
 
     @Test
-    public void addMoneyOfLessThanZeroThrowsException() throws Exception {
+    public void addMoneyOfLessThanZeroThrowsException() {
         Wallet wallet = new Wallet();
 
-        assertThatThrownBy(() -> {
-            wallet.addMoney(-1);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> wallet.addMoney(-1)).isInstanceOf(IllegalArgumentException.class);
     }
 
 }

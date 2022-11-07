@@ -1,4 +1,6 @@
-package com.jitterted.ebp.blackjack;
+package com.jitterted.ebp.blackjack.domain;
+
+import com.jitterted.ebp.blackjack.adapter.in.console.ConsoleHand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +38,11 @@ public class Hand {
         return cards.get(0);
     }
 
-    boolean dealerMustDrawCard() {
+    public boolean dealerMustDrawCard() {
         return value() <= 16;
     }
 
-    String display() {
+    public String display() {
         return ConsoleHand.cardsAsString(this);
     }
 
@@ -52,15 +54,15 @@ public class Hand {
         cards.add(deck.draw());
     }
 
-    boolean isBusted() {
+    public boolean isBusted() {
         return value() > 21;
     }
 
-    boolean pushes(Hand hand) {
+    public boolean pushes(Hand hand) {
         return hand.value() == value();
     }
 
-    boolean beats(Hand hand) {
+    public boolean beats(Hand hand) {
         return hand.value() < value();
     }
 }

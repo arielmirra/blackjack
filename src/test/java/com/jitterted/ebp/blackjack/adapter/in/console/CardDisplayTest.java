@@ -1,5 +1,9 @@
-package com.jitterted.ebp.blackjack;
+package com.jitterted.ebp.blackjack.adapter.in.console;
 
+import com.jitterted.ebp.blackjack.domain.Card;
+import com.jitterted.ebp.blackjack.domain.Rank;
+import com.jitterted.ebp.blackjack.domain.Suit;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,8 +18,8 @@ class CardDisplayTest {
 
         String expectedDisplay = "[31m┌─────────┐[1B[11D│10       │[1B[11D│         │[1B[11D│    ♥    │[1B[11D│         │[1B[11D│       10│[1B[11D└─────────┘";
 
-        assertThat(ConsoleCard.display(card))
-                .isEqualTo(expectedDisplay);
+        Assertions.assertThat(ConsoleCard.display(card))
+                  .isEqualTo(expectedDisplay);
     }
 
     @Test
