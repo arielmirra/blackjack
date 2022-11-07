@@ -7,7 +7,8 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 class CardTest {
 
-    public static final Suit DUMMY_SUIT = Suit.CLUBS;
+    private static final Suit DUMMY_SUIT = Suit.HEARTS;
+    private static final Rank DUMMY_RANK = Rank.TEN;
 
     @Test
     public void withNumberCardHasNumericValueOfTheNumber() throws Exception {
@@ -19,7 +20,7 @@ class CardTest {
 
     @Test
     public void withValueOfQueenHasNumericValueOf10() throws Exception {
-        Card card = new Card(DUMMY_SUIT, Rank.Q);
+        Card card = new Card(DUMMY_SUIT, Rank.QUEEN);
 
         assertThat(card.rankValue())
                 .isEqualTo(10);
@@ -27,7 +28,7 @@ class CardTest {
 
     @Test
     public void withAceHasNumericValueOf1() throws Exception {
-        Card card = new Card(DUMMY_SUIT, Rank.A);
+        Card card = new Card(DUMMY_SUIT, Rank.ACE);
 
         assertThat(card.rankValue())
                 .isEqualTo(1);
@@ -36,8 +37,8 @@ class CardTest {
     @Test
     public void suitOfHeartsOrDiamondsIsDisplayedInRed() throws Exception {
         // given a card with Hearts or Diamonds
-        Card heartsCard = new Card(Suit.HEARTS, Rank.TEN);
-        Card diamondsCard = new Card(Suit.DIAMONDS, Rank.EIGHT);
+        Card heartsCard = new Card(Suit.HEARTS, DUMMY_RANK);
+        Card diamondsCard = new Card(Suit.DIAMONDS, DUMMY_RANK);
 
         // when we ask for its display representation
         String ansiRedString = ansi().fgRed().toString();
@@ -47,14 +48,6 @@ class CardTest {
                 .contains(ansiRedString);
         assertThat(diamondsCard.display())
                 .contains(ansiRedString);
-    }
-
-    @Test
-    public void cardDisplaysSuitAsSymbol() throws Exception {
-        Card spadesCard = new Card(Suit.SPADES, Rank.NINE);
-
-        assertThat(spadesCard.display())
-                .contains("│    ♠    │");
     }
 
 }
