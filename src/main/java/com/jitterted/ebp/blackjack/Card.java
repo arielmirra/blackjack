@@ -17,23 +17,31 @@ public class Card {
         return rank.getValue();
     }
 
-    public String display() {
+    public static String display(Card card) {
         String[] lines = new String[7];
         lines[0] = "┌─────────┐";
-        lines[1] = String.format("│%s%s       │", rank, rank.getValue() == 10 ? "" : " ");
+        lines[1] = String.format("│%s%s       │", card.rank(), card.rank().getValue() == 10 ? "" : " ");
         lines[2] = "│         │";
-        lines[3] = String.format("│    %s    │", suit);
+        lines[3] = String.format("│    %s    │", card.suit());
         lines[4] = "│         │";
-        lines[5] = String.format("│       %s%s│", rank.getValue() == 10 ? "" : " ", rank);
+        lines[5] = String.format("│       %s%s│", card.rank().getValue() == 10 ? "" : " ", card.rank());
         lines[6] = "└─────────┘";
 
-        Ansi.Color color = suit.isRed() ? Ansi.Color.RED : Ansi.Color.BLACK;
+        Ansi.Color color = card.suit().isRed() ? Ansi.Color.RED : Ansi.Color.BLACK;
 
         return ansi()
                 .fg(color).toString()
                 + String.join(ansi().cursorDown(1)
                                     .cursorLeft(11)
                                     .toString(), lines);
+    }
+
+    public Suit suit() {
+        return suit;
+    }
+
+    public Rank rank() {
+        return rank;
     }
 
     @Override
