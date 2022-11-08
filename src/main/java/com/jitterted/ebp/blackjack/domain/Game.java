@@ -1,7 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.adapter.in.console.ConsoleGame;
-
 public class Game {
 
     private final Deck deck;
@@ -9,12 +7,10 @@ public class Game {
     private final Hand dealerHand = new Hand();
     private final Hand playerHand = new Hand();
 
+    private boolean playerDone = false;
+
     public Game() {
         deck = new Deck();
-    }
-
-    public Deck deck() {
-        return deck;
     }
 
     public Hand dealerHand() {
@@ -25,34 +21,36 @@ public class Game {
         return playerHand;
     }
 
-    public static void main(String[] args) {
-        ConsoleGame.displayWelcomeScreen();
-        ConsoleGame.waitForEnterFromUser();
-
-        playGame();
-
-        ConsoleGame.resetScreen();
-    }
-
-    private static void playGame() {
-        Game game = new Game();
-        game.initialDeal();
-        game.play();
-    }
-
     public void initialDeal() {
         dealRoundOfCards();
         dealRoundOfCards();
     }
 
-    public void play() {
-        ConsoleGame.playerTurn(this);
+    public boolean isPlayerDone() {
+        return playerDone;
+    }
 
-        dealerTurn();
+    public void playerHits() {
+        playerHand.drawFrom(deck);
+        playerDone = playerHand.isBusted();
+    }
 
-        ConsoleGame.displayFinalGameState(this);
+    public void playerStands() {
+        playerDone = true;
+    }
 
-        ConsoleGame.displayOutcome(this);
+    public String determineOutcome() {
+        if (playerHand.isBusted()) {
+            return "You Busted, so you lose.  💸";
+        } else if (dealerHand.isBusted()) {
+            return "Dealer went BUST, Player wins! Yay for you!! 💵";
+        } else if (playerHand.beats(dealerHand)) {
+            return "You beat the Dealer! 💵";
+        } else if (playerHand.pushes(dealerHand)) {
+            return "Push: Nobody wins, we'll call it even.";
+        } else {
+            return "You lost to the Dealer. 💸";
+        }
     }
 
     private void dealRoundOfCards() {
@@ -61,7 +59,7 @@ public class Game {
         dealerHand.drawFrom(deck);
     }
 
-    private void dealerTurn() {
+    public void dealerTurn() {
         // Dealer makes its choice automatically based on a simple heuristic (<=16 must hit, =>17 must stand)
         if (!playerHand.isBusted()) {
             while (dealerHand.dealerMustDrawCard()) {
