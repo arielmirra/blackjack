@@ -6,17 +6,17 @@ public enum Suit {
     HEARTS("♥", true),
     SPADES("♠", false);
 
-    private final String displayString;
+    private final String symbol;
 
     private final boolean isRed;
 
-    Suit(String displayString, boolean isRed) {
-        this.displayString = displayString;
+    Suit(String symbol, boolean isRed) {
+        this.symbol = symbol;
         this.isRed = isRed;
     }
 
-    public String getDisplayString() {
-        return displayString;
+    public String symbol() {
+        return symbol;
     }
 
     public boolean isRed() {
@@ -26,6 +26,6 @@ public enum Suit {
 
     @Override
     public String toString() {
-        return this.displayString;
+        return this.symbol;
     }
 }

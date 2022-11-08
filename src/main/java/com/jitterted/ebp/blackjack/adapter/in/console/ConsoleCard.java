@@ -1,6 +1,7 @@
 package com.jitterted.ebp.blackjack.adapter.in.console;
 
 import com.jitterted.ebp.blackjack.domain.Card;
+import com.jitterted.ebp.blackjack.domain.Rank;
 import org.fusesource.jansi.Ansi;
 
 import static org.fusesource.jansi.Ansi.ansi;
@@ -9,11 +10,11 @@ public class ConsoleCard {
     public static String display(Card card) {
         String[] lines = new String[7];
         lines[0] = "┌─────────┐";
-        lines[1] = String.format("│%s%s       │", card.rank(), card.rank().getValue() == 10 ? "" : " ");
+        lines[1] = String.format("│%s%s       │", card.rank().display(), card.rank() == Rank.TEN ? "" : " ");
         lines[2] = "│         │";
-        lines[3] = String.format("│    %s    │", card.suit());
+        lines[3] = String.format("│    %s    │", card.suit().symbol());
         lines[4] = "│         │";
-        lines[5] = String.format("│       %s%s│", card.rank().getValue() == 10 ? "" : " ", card.rank());
+        lines[5] = String.format("│       %s%s│", card.rank() == Rank.TEN ? "" : " ", card.rank().display());
         lines[6] = "└─────────┘";
 
         Ansi.Color color = card.suit().isRed() ? Ansi.Color.RED : Ansi.Color.BLACK;
@@ -23,5 +24,19 @@ public class ConsoleCard {
                 + String.join(ansi().cursorDown(1)
                                     .cursorLeft(11)
                                     .toString(), lines);
+    }
+
+    public static void displayBackOfCard() {
+        System.out.print(
+                ansi()
+                        .cursorUp(7)
+                        .cursorRight(12)
+                        .a("┌─────────┐").cursorDown(1).cursorLeft(11)
+                        .a("│░░░░░░░░░│").cursorDown(1).cursorLeft(11)
+                        .a("│░ E S   ░│").cursorDown(1).cursorLeft(11)
+                        .a("│░ P O R ░│").cursorDown(1).cursorLeft(11)
+                        .a("│░ A H I ░│").cursorDown(1).cursorLeft(11)
+                        .a("│░░░░░░░░░│").cursorDown(1).cursorLeft(11)
+                        .a("└─────────┘"));
     }
 }

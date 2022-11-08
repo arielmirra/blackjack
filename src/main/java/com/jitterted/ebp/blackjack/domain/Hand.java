@@ -1,7 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.adapter.in.console.ConsoleHand;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,10 +38,6 @@ public class Hand {
 
     public boolean dealerMustDrawCard() {
         return value() <= 16;
-    }
-
-    public String display() {
-        return ConsoleHand.cardsAsString(this);
     }
 
     public List<Card> cards() {

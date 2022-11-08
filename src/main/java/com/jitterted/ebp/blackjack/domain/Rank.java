@@ -16,22 +16,22 @@ public enum Rank {
     QUEEN("Q", 10),
     KING("K", 10);
 
-    private final String name;
+    private final String display;
 
     private final int value;
 
-    Rank(String name, int value) {
-        this.name = name;
+    Rank(String display, int value) {
+        this.display = display;
         this.value = value;
     }
 
     @Override
     public String toString() {
-        return this.name;
+        return this.display;
     }
 
-    public String getName() {
-        return name;
+    public String display() {
+        return display;
     }
 
     public int getValue() {
